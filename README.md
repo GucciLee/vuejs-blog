@@ -29,6 +29,10 @@ yarn run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+## GitHub Pages
+https://guccilee.github.io/vuejs-blog/dist/
+
+
 ## 依赖
 ```
 yarn add pug     [pug 模板引擎](https://github.com/pugjs/pug)
