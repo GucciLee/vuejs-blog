@@ -30,7 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ## 依赖
+```
 yarn add pug     [pug 模板引擎](https://github.com/pugjs/pug)
 yarn add pug-plain-loader
-
-
+```
