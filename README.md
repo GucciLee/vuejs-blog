@@ -35,6 +35,21 @@ https://guccilee.github.io/vuejs-blog/dist/
 
 ## 依赖
 ```
-yarn add pug     [pug 模板引擎](https://github.com/pugjs/pug)
 yarn add pug-plain-loader
+yarn add pug     [pug 模板引擎](https://github.com/pugjs/pug)
+
+yarn add sass-resources-loader [加载公共 scss 文件使用](https://www.npmjs.com/package/sass-resources-loader)
+yarn add bootstrap-sass --save [版本3.x ](https://v3.bootcss.com/) 、[版本4.x](https://v4.bootcss.com/)
+
+yarn add font-awesome --save    [Font Awesome 图标](http://www.fontawesome.com.cn/faicons/)
+```
+
+## 语法
+```
+:class="`fa fa-${item.icon}`"
+:class="{ active: index === activeNavIndex }
+:class="['collapse', 'navbar-collapse', { in: showCollapsedNav }]"
+
+:style="contactStyle"
+
 ```
