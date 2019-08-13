@@ -5,6 +5,8 @@ import store from './store'
 
 // 自定义指令
 import './directives'
+// 自定义组件
+import './components'
 
 // 设置 false 以阻止 Vue 在启动时生成生产提示
 Vue.config.productionTip = false
