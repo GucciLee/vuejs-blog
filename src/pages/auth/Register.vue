@@ -9,28 +9,47 @@
                     <h3 class="panel-title">请注册</h3>
                 </div>
 
-                <div class="panel-body" data-validator-form>
-                    <div class="form-group">
+                <div class="panel-body">
+                    <div :class="formGroupClass('username')">
                         <label class="control-label">用户名</label>
-                        <input v-model.trim="username"
-                               v-validator:input.required="{ regex: /^[a-zA-Z]+\w*\s?\w*$/, error: '用户名要求以字母开头的单词字符' }"
-                               type="text" class="form-control" placeholder="请填写用户名">
+                        <input type="text" class="form-control" placeholder="请填写用户名"
+                               name="username"
+                               data-vv-as="用户名"
+                               v-model.trim="form.username"
+                               v-validate="'required|min:6|max:12'" >
+                        <span class="help-block">{{ errors.first('username') }}</span>
                     </div>
-                    <div class="form-group">
+                    <div :class="formGroupClass('email')">
+                        <label class="control-label">邮箱</label>
+                        <input type="email" class="form-control" placeholder="请填写邮箱"
+                               name="email"
+                               v-model.trim="form.email"
+                               v-validate="'required|email'" >
+                        <span class="help-block">{{ errors.first('email') }}</span>
+                    </div>
+                    <div :class="formGroupClass('password')">
                         <label class="control-label">密码</label>
-                        <input id="password" v-model.trim="password"
-                               v-validator.required="{ regex: /^\w{6,16}$/, error: '密码要求 6 ~ 16 个单词字符' }"
-                               type="password" class="form-control" placeholder="请填写密码">
+                        <input type="password" class="form-control" placeholder="请填写密码"
+                               name="password"
+                               v-model.trim="form.password"
+                               v-validate="'required|min:6|max:16'" >
+                        <span class="help-block">{{ errors.first('password') }}</span>
                     </div>
-                    <div class="form-group">
+                    <div :class="formGroupClass('password_confirmation')">
                         <label class="control-label">确认密码</label>
-                        <input v-model.trim="cpassword" v-validator.required="{ target: '#password' }" type="password"
-                               class="form-control" placeholder="请填写确认密码">
+                        <input type="password" class="form-control" placeholder="请填写确认密码"
+                               name="password_confirmation"
+                               v-model.trim="form.cpassword"
+                               v-validate="'required|confirmed:password'" >
+                        <span class="help-block">{{ errors.first('password_confirmation') }}</span>
                     </div>
-                    <div class="form-group">
+                    <div :class="formGroupClass('captcha')">
                         <label class="control-label">图片验证码</label>
-                        <input v-model.trim="captcha" v-validator.required="{ title: '图片验证码' }" type="text"
-                               class="form-control" placeholder="请填写验证码">
+                        <input type="text" class="form-control" placeholder="图片验证码"
+                               name="captcha"
+                               v-model.trim="form.captcha"
+                               v-validate="'required'" >
+                        <span class="help-block">{{ errors.first('captcha') }}</span>
                     </div>
                     <div class="thumbnail" title="点击图片重新获取验证码" @click="getCaptcha">
                         <div class="captcha vcenter" v-html="captchaTpl"></div>
@@ -52,36 +71,40 @@
         name: 'Register',
         data() {
             return {
+                form: {
+                    username: '', // 用户名
+                    email: '', // 邮箱
+                    password: '', // 密码
+                    cpassword: '', // 确认密码
+                    captcha: '', // 验证码
+                },
                 captchaTpl: '', // 验证码模板
-                username: '', // 用户名
-                password: '', // 密码
-                cpassword: '', // 确认密码
-                captcha: '', // 验证码
                 msg: '', // 消息
                 msgType: '', // 消息类型
                 msgShow: false // 是否显示消息，默认不显示
             }
         },
-        created() {
-            this.getCaptcha()
-        },
         methods: {
+            formGroupClass(name){
+                return 'form-group ' + (this.$validator.errors.first(name) && 'has-error')
+            },
             getCaptcha() {
                 const { tpl, captcha } = createCaptcha(6)
 
                 this.captchaTpl = tpl
                 this.localCaptcha = captcha
             },
-            register(e) {
-                this.$nextTick(() => {
-                    const target = e.target.type === 'submit' ? e.target : e.target.parentElement
-
-                    if (target.canSubmit) {
+            register() {
+                this.$validator.validate().then((result) => {
+                    // 验证成功操作
+                    if (result) {
                         this.submit()
                     }
-                })
+                });
             },
             submit() {
+                console.log('submit')
+                return false;
                 if (this.captcha.toUpperCase() !== this.localCaptcha) {
                     this.showMsg('验证码不正确')
                     this.getCaptcha()

@@ -31,3 +31,6 @@ Mutation ------ this.$store.commit('$user/$methodName') ------ mapMutations 赋�
 Action   ------ this.$store.dispatch('$methodName', $params)       ------ mapActions 赋值
 Action   ------ this.$store.dispatch('$user/$methodName', $params) ------ mapActions 赋值
 ```
+
+## 表单验证
+https://baianat.github.io/vee-validate/guide/rules.html
