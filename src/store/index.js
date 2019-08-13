@@ -1,25 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ls from '@/utils/localStorage'
-import router from '@/router'
+
+// 子模块
+import user_module from './modules/user'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    // 状态仓库
     state: {
-        user: ls.getItem('user')
     },
+    // 类似于我们的计算属性，可以帮助我们缓存我们的数据，因为我们的 state 是响应式的嘛
+    getters: {
+
+    },
+    // 更新操作（必须是同步操作）
     mutations: {
-        UPDATE_USER(state, user) {
-            state.user = user
-            ls.setItem('user', user)
-        }
     },
+    // 异步操作
     actions: {
-        login({ commit }, user) {
-            // 登录时有传用户信息，就更新下用户信息
-            if (user) commit('UPDATE_USER', user)
-            // router.push('/')
-        }
+    },
+    // 模块
+    modules: {
+        USER: user_module,
     }
 })

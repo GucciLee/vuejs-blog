@@ -92,7 +92,7 @@
                         avatar: `https://api.adorable.io/avatars/200/${this.username}.png`
                     }
                     // 从仓库获取用户信息
-                    const localUser = this.$store.state.user
+                    const localUser = this.$store.state.USER.infos
 
                     if (localUser) {
                         if (localUser.name === user.name) {
@@ -107,7 +107,7 @@
             },
             login(user) {
                 // 分发 login 事件，以保存用户信息和登录
-                this.$store.dispatch('login', user)
+                this.$store.dispatch('USER/login', user)
                 this.showMsg('注册成功', 'success')
             },
             showMsg(msg, type = 'warning') {

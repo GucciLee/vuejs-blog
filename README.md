@@ -43,17 +43,3 @@ yarn add bootstrap-sass --save [版本3.x ](https://v3.bootcss.com/) 、[版本4
 
 yarn add font-awesome --save    [Font Awesome 图标](http://www.fontawesome.com.cn/faicons/)
 ```
-
-## 语法
-```
-:class="`fa fa-${item.icon}`"
-:class="{ active: index === activeNavIndex }
-:class="['collapse', 'navbar-collapse', { in: showCollapsedNav }]"
-
-:style="contactStyle"
-
-this.$nextTick
-
-this.$store.state.user
-this.$store.dispatch('login', user)
-```
