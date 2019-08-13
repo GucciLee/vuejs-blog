@@ -53,4 +53,7 @@ yarn add font-awesome --save    [Font Awesome 图标](http://www.fontawesome.com
 :style="contactStyle"
 
 this.$nextTick
+
+this.$store.state.user
+this.$store.dispatch('login', user)
 ```
