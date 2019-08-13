@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Index from '@/pages/index.vue'
 
 Vue.use(Router)
 
@@ -11,7 +10,12 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: () => import(/* webpackChunkName: "index" */ '@/pages/index.vue')
+      component: () => import('@/pages/index.vue')
     },
+    {
+      path: "/auth/register",
+      name: "Register",
+      component: () => import('@/pages/auth/Register')
+    }
   ]
 })
