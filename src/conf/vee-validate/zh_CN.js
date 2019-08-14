@@ -37,8 +37,16 @@ export default {
         numeric: (field) => `${field}只能包含数字字符`,
         regex: (field) => `${field}格式无效`,
         // required: (field) => `${field}是必须的`,
-        required: (alias) => `${alias}是必须的`,
+        required: (alias) => `${alias}不能为空`,
         size: (field, [size]) => `${field}必须小于${formatFileSize(size)}`,
         url: (field) => `${field}不是一个有效的url`
+    },
+    attributes: {
+        email: '邮箱',
+        user: '用户',
+        username: '用户名',
+        password: '密码',
+        password_confirmation: '确认密码',
+        captcha: '验证码'
     }
 }

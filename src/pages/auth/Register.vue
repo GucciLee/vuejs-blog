@@ -10,47 +10,36 @@
                 </div>
 
                 <div class="panel-body">
-                    <div :class="formGroupClass('username')">
-                        <label class="control-label">用户名</label>
+                    <FormGroup label="用户名" :error="errors.first('username')">
                         <input type="text" class="form-control" placeholder="请填写用户名"
                                name="username"
-                               data-vv-as="用户名"
                                v-model.trim="form.username"
                                v-validate="'required|min:6|max:12'" >
-                        <span class="help-block">{{ errors.first('username') }}</span>
-                    </div>
-                    <div :class="formGroupClass('email')">
-                        <label class="control-label">邮箱</label>
+                    </FormGroup>
+                    <FormGroup label="邮箱" :error="errors.first('email')">
                         <input type="email" class="form-control" placeholder="请填写邮箱"
                                name="email"
                                v-model.trim="form.email"
                                v-validate="'required|email'" >
-                        <span class="help-block">{{ errors.first('email') }}</span>
-                    </div>
-                    <div :class="formGroupClass('password')">
-                        <label class="control-label">密码</label>
+                    </FormGroup>
+                    <FormGroup label="密码" :error="errors.first('password')">
                         <input type="password" class="form-control" placeholder="请填写密码"
                                name="password"
                                v-model.trim="form.password"
                                v-validate="'required|min:6|max:16'" >
-                        <span class="help-block">{{ errors.first('password') }}</span>
-                    </div>
-                    <div :class="formGroupClass('password_confirmation')">
-                        <label class="control-label">确认密码</label>
+                    </FormGroup>
+                    <FormGroup label="确认密码" :error="errors.first('password_confirmation')">
                         <input type="password" class="form-control" placeholder="请填写确认密码"
                                name="password_confirmation"
                                v-model.trim="form.cpassword"
                                v-validate="'required|confirmed:password'" >
-                        <span class="help-block">{{ errors.first('password_confirmation') }}</span>
-                    </div>
-                    <div :class="formGroupClass('captcha')">
-                        <label class="control-label">图片验证码</label>
+                    </FormGroup>
+                    <FormGroup label="验证码" :error="errors.first('captcha')">
                         <input type="text" class="form-control" placeholder="图片验证码"
                                name="captcha"
                                v-model.trim="form.captcha"
                                v-validate="'required'" >
-                        <span class="help-block">{{ errors.first('captcha') }}</span>
-                    </div>
+                    </FormGroup>
                     <div class="thumbnail" title="点击图片重新获取验证码" @click="getCaptcha">
                         <div class="captcha vcenter" v-html="captchaTpl"></div>
                     </div>
@@ -86,7 +75,7 @@
         },
         methods: {
             formGroupClass(name){
-                return 'form-group ' + (this.$validator.errors.first(name) && 'has-error')
+                return 'form-group ' + (this.$validator.errors.has(name) && 'has-error')
             },
             getCaptcha() {
                 const { tpl, captcha } = createCaptcha(6)
