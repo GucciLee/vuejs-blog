@@ -35,18 +35,7 @@ Action   ------ this.$store.dispatch('$user/$methodName', $params) ------ mapAct
 ## 表单验证
 https://baianat.github.io/vee-validate/guide/rules.html
 ```
-# 用法一
-<div :class="['form-group', {'has-error': errors.has('username')}]">
-    <label class="control-label">用户名</label>
-    <input type="text" class="form-control" placeholder="请填写用户名"
-           name="username"
-           data-vv-as="自定义 attributes 文本"
-           v-model.trim="form.username"
-           v-validate="'required|min:6|max:12'" >
-    <span class="help-block" v-if="errors.has('username')">{{ errors.first('username') }}</span>
-</div>
-
-# 用法二【组件形式，推荐】
+# 用法【组件形式，推荐】
 <FormGroup label="邮箱" :error="errors.first('email')">
     <input type="email" class="form-control" placeholder="请填写邮箱"
            name="email"

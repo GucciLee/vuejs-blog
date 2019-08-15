@@ -9,44 +9,53 @@
                     <h3 class="panel-title">请注册</h3>
                 </div>
 
-                <div class="panel-body">
-                    <FormGroup label="用户名" :error="errors.first('username')">
-                        <input type="text" class="form-control" placeholder="请填写用户名"
-                               name="username"
-                               v-model.trim="form.username"
-                               v-validate="'required|min:6|max:12'" >
-                    </FormGroup>
-                    <FormGroup label="邮箱" :error="errors.first('email')">
-                        <input type="email" class="form-control" placeholder="请填写邮箱"
-                               name="email"
-                               v-model.trim="form.email"
-                               v-validate="'required|email'" >
-                    </FormGroup>
-                    <FormGroup label="密码" :error="errors.first('password')">
-                        <input type="password" class="form-control" placeholder="请填写密码"
-                               name="password"
-                               v-model.trim="form.password"
-                               v-validate="'required|min:6|max:16'" >
-                    </FormGroup>
-                    <FormGroup label="确认密码" :error="errors.first('password_confirmation')">
-                        <input type="password" class="form-control" placeholder="请填写确认密码"
-                               name="password_confirmation"
-                               v-model.trim="form.cpassword"
-                               v-validate="'required|confirmed:password'" >
-                    </FormGroup>
-                    <FormGroup label="验证码" :error="errors.first('captcha')">
-                        <input type="text" class="form-control" placeholder="图片验证码"
-                               name="captcha"
-                               v-model.trim="form.captcha"
-                               v-validate="'required'" >
-                    </FormGroup>
-                    <div class="thumbnail" title="点击图片重新获取验证码" @click="getCaptcha">
-                        <div class="captcha vcenter" v-html="captchaTpl"></div>
+                <form  @submit.prevent="validateBeforeSubmit">
+                    <div class="panel-body">
+                        <FormGroup label="手机号码" :error="errors.first('phone')">
+                            <input type="text" class="form-control" placeholder="请填写手机号码"
+                                   name="phone"
+                                   v-model="form.phone"
+                                   v-validate="'liguanjie'" >
+                        </FormGroup>
+
+                        <FormGroup label="用户名" :error="errors.first('username')">
+                            <input type="text" class="form-control" placeholder="请填写用户名"
+                                   name="username"
+                                   v-model.trim="form.username"
+                                   v-validate="'required|min:6|max:12'" >
+                        </FormGroup>
+                        <FormGroup label="邮箱" :error="errors.first('email')">
+                            <input type="email" class="form-control" placeholder="请填写邮箱"
+                                   name="email"
+                                   v-model.trim="form.email"
+                                   v-validate="'required|email'" >
+                        </FormGroup>
+                        <FormGroup label="密码" :error="errors.first('password')">
+                            <input type="password" class="form-control" placeholder="请填写密码"
+                                   name="password"
+                                   v-model.trim="form.password"
+                                   v-validate="'required|min:6|max:16'" >
+                        </FormGroup>
+                        <FormGroup label="确认密码" :error="errors.first('password_confirmation')">
+                            <input type="password" class="form-control" placeholder="请填写确认密码"
+                                   name="password_confirmation"
+                                   v-model.trim="form.cpassword"
+                                   v-validate="'required|confirmed:password'" >
+                        </FormGroup>
+                        <FormGroup label="验证码" :error="errors.first('captcha')">
+                            <input type="text" class="form-control" placeholder="图片验证码"
+                                   name="captcha"
+                                   v-model.trim="form.captcha"
+                                   v-validate="'required'" >
+                        </FormGroup>
+                        <div class="thumbnail" title="点击图片重新获取验证码" @click="getCaptcha">
+                            <div class="captcha vcenter" v-html="captchaTpl"></div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-success btn-block">
+                            <i class="fa fa-btn fa-sign-in"></i> 注册
+                        </button>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-success btn-block" @click.stop="register">
-                        <i class="fa fa-btn fa-sign-in"></i> 注册
-                    </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -61,6 +70,7 @@
         data() {
             return {
                 form: {
+                    phone: '', // 用户名
                     username: '', // 用户名
                     email: '', // 邮箱
                     password: '', // 密码
@@ -83,8 +93,8 @@
                 this.captchaTpl = tpl
                 this.localCaptcha = captcha
             },
-            register() {
-                this.$validator.validate().then((result) => {
+            validateBeforeSubmit() {
+                this.$validator.validateAll().then((result) => {
                     // 验证成功操作
                     if (result) {
                         this.submit()
