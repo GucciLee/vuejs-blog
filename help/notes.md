@@ -31,15 +31,3 @@ Mutation ------ this.$store.commit('$user/$methodName') ------ mapMutations 赋�
 Action   ------ this.$store.dispatch('$methodName', $params)       ------ mapActions 赋值
 Action   ------ this.$store.dispatch('$user/$methodName', $params) ------ mapActions 赋值
 ```
-
-## 表单验证
-https://baianat.github.io/vee-validate/guide/rules.html
-```
-# 用法【组件形式，推荐】
-<FormGroup label="邮箱" :error="errors.first('email')">
-    <input type="email" class="form-control" placeholder="请填写邮箱"
-           name="email"
-           v-model.trim="form.email"
-           v-validate="'required|email'" >
-</FormGroup>
-```

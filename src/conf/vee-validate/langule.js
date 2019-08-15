@@ -43,7 +43,8 @@ export default {
             url: (field) => `${field}不是一个有效的url`
         },
         attributes: {
-            email: 'ss邮箱',
+            email: '邮箱',
+            phone: '手机号码',
             user: '用户',
             username: '用户名',
             password: '密码',

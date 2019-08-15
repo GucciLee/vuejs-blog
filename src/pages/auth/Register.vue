@@ -11,16 +11,11 @@
 
                 <form  @submit.prevent="validateBeforeSubmit">
                     <div class="panel-body">
-                        <FormGroup label="手机号码" :error="errors.first('email00')">
-                            <input type="text" class="form-control" placeholder="测试"
-                                   name="email00"
-                                   v-validate="'unique'" >
-                        </FormGroup>
                         <FormGroup label="手机号码" :error="errors.first('phone')">
                             <input type="text" class="form-control" placeholder="请填写手机号码"
                                    name="phone"
                                    v-model="form.phone"
-                                   v-validate="'phone'" >
+                                   v-validate="'required|phone'" >
                         </FormGroup>
 
                         <FormGroup label="用户名" :error="errors.first('username')">
