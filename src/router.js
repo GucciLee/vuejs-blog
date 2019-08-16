@@ -16,6 +16,6 @@ export default new Router({
       path: "/auth/register",
       name: "Register",
       component: () => import('@/pages/auth/Register')
-    }
+    },
   ]
 })

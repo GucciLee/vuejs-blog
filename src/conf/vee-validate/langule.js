@@ -18,8 +18,8 @@ export default {
             dimensions: (field, [width, height]) => `${field}必须在${width}像素与${height}像素之间`,
             email: (field) => `${field}不是一个有效的邮箱`,
             excluded: (field) => `${field}不是一个有效值`,
-            ext: (field) => `${field}不是一个有效的文件`,
-            image: (field) => `${field}不是一张有效的图片`,
+            ext: (field, params) => `${field}只支持 “${params}” 格式`,
+            image: (field) => `不是一张有效的图片`,
             included: (field) => `${field}不是一个有效值`,
             integer: (field) => `${field}必须是整数`,
             ip: (field) => `${field}不是一个有效的地址`,
@@ -49,7 +49,8 @@ export default {
             username: '用户名',
             password: '密码',
             password_confirmation: '确认密码',
-            captcha: '验证码'
+            captcha: '验证码',
+            sex: '性别'
         }
     }
 }

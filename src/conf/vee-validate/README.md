@@ -30,3 +30,6 @@ this.$validator.validateAll().then((result) => {
     }
 });
 ```
+
+### 1.3 使用案例参考：
+vuejs-blog/src/components/vee-validate/test.vue

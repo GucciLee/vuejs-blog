@@ -5,6 +5,8 @@ import Config from './config';
 import Rules from './rules'
 
 // 表单验证
+// 使用案例参考：
+// vuejs-blog/src/components/vee-validate/test.vue
 Vue.use(VeeValidate, Config);
 
 Validator.extend('phone', Rules.phone);

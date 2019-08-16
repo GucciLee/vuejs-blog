@@ -19,6 +19,6 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .control-label{color: $font-color;}
 </style>
