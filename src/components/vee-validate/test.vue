@@ -8,9 +8,10 @@
                        v-validate="'required|phone'" >
             </FormGroup>
 
-            <FormGroup label="自定义规则 - 唯一性验证" :error="errors.first('unique')">
+            <FormGroup label="自定义规则 - 唯一性验证 Ajax" :error="errors.first('unique')">
                 <input type="text" class="form-control" placeholder="唯一性验证, 1-5 失败"
                        name="unique"
+                       data-vv-delay="80"
                        v-validate="uniqueRuler" >
             </FormGroup>
 
@@ -63,10 +64,25 @@
             </FormGroup>
 
             <FormGroup label="文件验证" :error="errors.first('image_ext_field')">
-                <input v-validate="'image|ext:jpeg,jpg'"
+                <input v-validate="'required|image|ext:jpeg,jpg'"
                        data-vv-as="图片"
                        @change="upload"
                        name="image_ext_field" type="file">
+            </FormGroup>
+
+            <FormGroup label="正则验证" :error="errors.first('me_regex')">
+                <input type="text" class="form-control" placeholder="以 .js|ts 结尾"
+                       name="me_regex"
+                       data-vv-as="data-vv-as"
+                       data-vv-delay="200"
+                       data-vv-name="me_regex"
+                       v-validate="{ required: true, regex: /\.(js|ts)$/ }" >
+            </FormGroup>
+
+            <FormGroup label="组件中自定义验证规则" :error="errors.first('me_me_me')">
+                <input type="text" class="form-control" placeholder="组件中自定义验证规则"
+                       name="me_me_me"
+                       v-validate="'required|myName'" >
             </FormGroup>
 
             <button type="submit" class="btn btn-lg btn-success btn-block">
@@ -94,6 +110,17 @@
                     image_ext_field: ''
                 }
             }
+        },
+        created(){
+            // 组件中自定义验证规则
+            this.$validator.extend('myName', {
+                getMessage: field => field + '组件中自定义验证规则!',
+                validate: (value, args) => {
+                    return false
+                }
+            }, {
+                immediate: false
+            })
         },
         computed: {
             uniqueRuler(){

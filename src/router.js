@@ -17,5 +17,10 @@ export default new Router({
       name: "Register",
       component: () => import('@/pages/auth/Register')
     },
+    {
+      path: "/test",
+      name: "Register",
+      component: () => import('@/components/vee-validate/test')
+    }
   ]
 })

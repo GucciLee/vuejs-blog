@@ -10,6 +10,8 @@
            name="email"
            v-model.trim="form.email"
            data-vv-as="自定义名"
+           data-vv-delay="延迟验证 ms"
+           data-vv-name="自定义表单 name 名"
            v-validate="'required|email'" >
 </FormGroup>
 ```
